@@ -4,6 +4,9 @@ import { getMe } from "@/lib/api/serverApi"
 import Link from 'next/link';
 import Image from 'next/image';
 
+const URL = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:3000';
+
+
 export async function generateMetadata(): Promise<Metadata> {
   const { username, avatar } = await getMe()
 
@@ -13,7 +16,7 @@ export async function generateMetadata(): Promise<Metadata> {
     openGraph: {
       title: `Profile: ${username}`,
       description:`View the profile of ${username}`,
-      url: `https://localhost:3000/profile`,
+      url: `${URL}/profile`,
       siteName: 'NoteHub',
       images: [
         {
