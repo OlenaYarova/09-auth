@@ -1,5 +1,5 @@
 
-import { nextServer } from "./api"
+import { nextServer } from './api'
 import { FetchNotesResponse, NoteFormValues, Note } from "@/types/note"
 import type { User } from "@/types/user";
 
@@ -75,7 +75,6 @@ export const checkSession = async (): Promise<boolean> => {
     const { data } = await nextServer.get<{ success: boolean }>('/auth/session');
     return data.success;
 };
-
 
 
 

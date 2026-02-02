@@ -1,5 +1,5 @@
 import type { FetchNotesResponse, Note } from "@/types/note"
-import { nextServer } from "./api"
+import { nextServer } from './api'
 import { cookies } from 'next/headers';
 import { AxiosResponse } from "axios";
 import { User } from '../../types/user';

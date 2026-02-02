@@ -9,7 +9,7 @@ import { useAuthStore } from '@/lib/store/authStore';
 import Image from "next/image";
 import toast from 'react-hot-toast';
 
-const EditProfilePage = () => {
+ const EditProfilePage = () => {
   const router = useRouter();
     const user = useAuthStore(state => state.user);
     const setUser = useAuthStore(state => state.setUser);
