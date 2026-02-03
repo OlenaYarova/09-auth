@@ -14,7 +14,7 @@ import toast from 'react-hot-toast';
     const user = useAuthStore(state => state.user);
     const setUser = useAuthStore(state => state.setUser);
     
-  const [username, setUsername] = useState<string | undefined >(user?.username);
+  const [username, setUsername] = useState(user?.username ?? '');
  
 
     const editProfilePageMutation = useMutation({
@@ -33,20 +33,19 @@ import toast from 'react-hot-toast';
     setUsername(event.target.value);
   };
     
-  const handleSubmit =  (formData: FormData) => {
-    const newUsername = formData.get('username') as string;
-    if (newUsername.length > 50) {
+  const handleSubmit =  () => {
+   if (!username|| username.length > 50) {
       toast.error('Username must be between 3 and 50 characters!');
       return;
     }
 
-    editProfilePageMutation.mutate(newUsername);
+    editProfilePageMutation.mutate({ username });
   };
 
 
  
   const handleCancel = () => {
-    router.push("/profile");
+    router.back();
   };
 
 
@@ -69,7 +68,7 @@ import toast from 'react-hot-toast';
                                 <input id="username"
                                     type="text"
                                     className={css.input}
-                                    defaultValue={username}
+                                   value={username}
                                     onChange={handleInputChange}
                                     disabled={editProfilePageMutation.isPending}
                                 />

@@ -41,12 +41,12 @@ export async function deleteNote(id: string): Promise<Note> {
 
 
 
-export async function fetchNoteById(id: Note['id']) {
+export async function fetchNoteById(id: Note['id']): Promise<Note> {
     const { data } = await nextServer.get<Note>(`/notes/${id}`);
     return data;
 }
 
-export async function register(payload: RegisterRequest) {
+export async function register(payload: RegisterRequest): Promise<User> {
     const { data } = await nextServer.post<User>("/auth/register", payload, {
         headers: {
             "Content-Type": "application/json",
@@ -79,14 +79,19 @@ export const checkSession = async (): Promise<boolean> => {
 
 
 export const getMe = async (): Promise<User> => {
-
-    const { data } = await nextServer.get('/users/me');
+    const { data } = await nextServer.get<User>('/users/me');
     return data;
 };
 
 
-export const updateMe = async (username: string): Promise<User> => {
+export type UpdateMeRequest = {
+    username: string;
+};
 
-    const { data } = await nextServer.patch('/users/me', { username });
+
+export const updateMe = async (
+    payload: UpdateMeRequest
+): Promise<User> => {
+    const { data } = await nextServer.patch<User>('/users/me', payload);
     return data;
 };

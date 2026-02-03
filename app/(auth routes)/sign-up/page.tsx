@@ -6,7 +6,7 @@ import { register, RegisterRequest } from '@/lib/api/clientApi';
 import css from "./SignUpPage.module.css"
 import { useAuthStore } from '@/lib/store/authStore';
 
-const SingUp = () => {
+const SignUp = () => {
   const router = useRouter();
  const setUser = useAuthStore(state => state.setUser);
 
@@ -15,7 +15,8 @@ const SingUp = () => {
   
 
     const handleSubmit = async (formData: FormData) => {
-        try {
+      try {
+          setError('')
       const formValues = Object.fromEntries(formData) as RegisterRequest;
           const user = await register(formValues);
     
@@ -53,7 +54,7 @@ const SingUp = () => {
       </button>
     </div>
 
- {error && <p className={css.error}>Error</p>}
+ {error && <p className={css.error}>{error}</p>}
             
   </form>
 </main>
@@ -61,4 +62,4 @@ const SingUp = () => {
 )};
 
 
-export default SingUp;
+export default SignUp;
