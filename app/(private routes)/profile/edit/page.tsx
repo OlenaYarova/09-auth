@@ -33,13 +33,14 @@ import toast from 'react-hot-toast';
     setUsername(event.target.value);
   };
     
-  const handleSubmit =  () => {
-   if (!username|| username.length > 50) {
+     const handleSubmit = (formData: FormData) => {
+         const newUsername = formData.get('username') as string;
+   if ( newUsername.length < 3 || newUsername.length > 50) {
       toast.error('Username must be between 3 and 50 characters!');
       return;
     }
 
-    editProfilePageMutation.mutate({ username });
+    editProfilePageMutation.mutate({ username: newUsername });
   };
 
 
@@ -66,6 +67,7 @@ import toast from 'react-hot-toast';
                             <div className={css.usernameWrapper}>
                                 <label htmlFor="username">Username:</label>
                                 <input id="username"
+                                     name="username"
                                     type="text"
                                     className={css.input}
                                    value={username}
